@@ -11,7 +11,7 @@ function RedirectToThankYou(): void {
 /**
  * Send a message on discord to indicate that someone has registered.
  * If it fails, nothing will happen.
- * @param {Event} event 
+ * @param {Event} event
  */
 async function NotifyDiscord(event, whurl: string, form: FormData) {
     const d = new Date();
@@ -51,9 +51,30 @@ function SubmitMUForm(e: React.FormEvent<HTMLFormElement>, url: string, wh: stri
     e.preventDefault();
 
     const form_data = new FormData(form);
+    const entries = new Map(form_data.entries());
 
-    fetch(url, { method: "POST", body: form_data })
-        .then(response => RedirectToThankYou(), reason => alert("Failed, internal error. Please email us at support@musicunbounded.org with details.")).catch();
+    console.log(form_data)
+    // fetch(url, { method: "POST", body: form_data })
+    // TODO: temporary measures
+    fetch(url + '?' + new URLSearchParams({
+        'entry.1257158707': entries.get('Guardian Full Name').toString(),
+        'entry.869250773': entries.get('Student Full Name').toString(),
+        'entry.52178484': entries.get('Email').toString(),
+        'entry.1659315314': entries.get('Age').toString(),
+        'entry.1533136250': entries.get('Phone Number').toString(),
+        'entry.21704316': entries.get('Preferred Instrument').toString(),
+        'entry.642161727': entries.get('Experience').toString(),
+        'entry.50315882': entries.get('Guardian Full Name').toString(),
+    }), { method: "POST", mode: 'no-cors'})
+        .then(response => {
+            // console.log(response)
+            // if (!response.ok) {
+            //     throw new Error("Error failed when calling " + JSON.stringify(form_data))
+            // }
+            RedirectToThankYou()
+        })
+        // .catch(reason => alert("Failed, internal error. Please email us at support@musicunbounded.org with details."));
+        .catch(reason => alert(reason));
 
     if (wh != "") {
         NotifyDiscord(e, wh, form_data);
@@ -75,7 +96,9 @@ export default function MUForm(props: { children?: React.ReactNode, apps_script_
         }
         SetSubmitDisabled(true);
         SetSubmitButtonName("Submitting...")
-        SubmitMUForm(e, url, whurl, document.forms["main_form"]);
+        // SubmitMUForm(e, url, whurl, document.forms["main_form"]);
+        //TODO: remove url
+        SubmitMUForm(e, 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSfLZGN7k3nEpawKAFZ0nxfGvifVYvOCWnjQJjghRdeD50-wWA/formResponse', whurl, document.forms["main_form"]);
     }
 
     return (
