@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from "react";
 import { Bin, ToPublicUTF8 } from "./util";
 
