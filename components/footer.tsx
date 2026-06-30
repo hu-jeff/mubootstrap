@@ -40,7 +40,7 @@ export default function Footer() {
             <FooterColumn>
                 <FooterTitle>Get Involved</FooterTitle>
                 <FooterLink title='Apply to be a Volunteer' dest='/volunteer' />
-                <FooterLink title='Become one of our Teachers' dest='/teach' />
+                <FooterLink title='Become one of our Teachers' dest='https://forms.gle/TEAbKVA1wUV7cHVF7' />
                 <FooterLink title='Contact' dest='/contact' />
             </FooterColumn>
             <FooterColumn>

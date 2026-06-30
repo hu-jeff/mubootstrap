@@ -23,7 +23,7 @@ export const nav_options: { parent_title: string, children: { label: string, des
                 label: "Volunteer", dest: "/volunteer"
             },
             {
-                label: "Teach", dest: "/teach"
+                label: "Teach", dest: "https://forms.gle/TEAbKVA1wUV7cHVF7"
             },
             {
                 label: "Contact", dest: "/contact"
